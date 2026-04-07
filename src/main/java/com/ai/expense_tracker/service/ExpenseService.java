@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-class ExpenseService {
+public class ExpenseService {
 
     private final ExpenseRepository expenseRepository;
 
@@ -29,14 +29,6 @@ class ExpenseService {
 
     }
 
-    public List<Expense> getAllExpenses() {
-        return expenseRepository.findAll();
-    }
-
-    public Expense getExpenseById(int id) {
-        return expenseRepository.findById(id).get();
-    }
-
     public void updateExpense(int id, String title, String description, String category, double amount, LocalDate date) {
         if (expenseRepository.findById(id).isPresent()) {
             Expense expense = expenseRepository.findById(id).get();
@@ -47,6 +39,14 @@ class ExpenseService {
             expense.setDate(date);
             expenseRepository.save(expense);
         }
+    }
+
+    public List<Expense> getAllExpenses() {
+        return expenseRepository.findAll();
+    }
+
+    public Expense getExpenseById(int id) {
+        return expenseRepository.findById(id).get();
     }
 
     public void deleteExpense(int id) {
