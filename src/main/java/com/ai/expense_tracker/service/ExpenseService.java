@@ -1,6 +1,7 @@
 package com.ai.expense_tracker.service;
 
 import com.ai.expense_tracker.entity.Expense;
+import com.ai.expense_tracker.exception.ResourceNotFoundException;
 import com.ai.expense_tracker.repository.ExpenseRepository;
 import org.springframework.stereotype.Service;
 
@@ -46,7 +47,7 @@ public class ExpenseService {
     }
 
     public Expense getExpenseById(int id) {
-        return expenseRepository.findById(id).get();
+        return expenseRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Expense not found with id: " + id));
     }
 
     public void deleteExpense(int id) {

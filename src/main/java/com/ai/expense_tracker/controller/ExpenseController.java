@@ -3,6 +3,7 @@ package com.ai.expense_tracker.controller;
 import com.ai.expense_tracker.dto.ExpenseRequest;
 import com.ai.expense_tracker.entity.Expense;
 import com.ai.expense_tracker.service.ExpenseService;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,12 +19,12 @@ class ExpenseController {
     }
 
     @PostMapping
-    public void createExpense(@RequestBody ExpenseRequest request) {
+    public void createExpense(@Valid @RequestBody ExpenseRequest request) {
         expenseService.createExpense(request.getTitle(), request.getDescription(), request.getCategory(), request.getAmount(), request.getDate());
     }
 
     @PutMapping("/{id}")
-    public void updateExpense(@PathVariable int id, @RequestBody ExpenseRequest request) {
+    public void updateExpense(@PathVariable int id, @Valid @RequestBody ExpenseRequest request) {
         expenseService.updateExpense(id, request.getTitle(), request.getDescription(), request.getCategory(), request.getAmount(), request.getDate());
     }
 
